@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="azzera()">
+    <h4>Gioco della tombola</h4>
+    <div id="tabella"></div>
+    <button id="estrai">estrai</button>
+
+    <script>
+        let numeri = [];
+
+        function estrai() {
+            let casuale = 0;
+            while(casuale==numeri[casuale]){
+                 casuale = Math.floor(Math.random()*100) +1;
+            }
+           numeri[casuale] = casuale;
+        
+        }
+        function azzera(){
+            for (let i = 1; i < 100; i++) {
+                numeri[i]=0;
+            }
+        }
+        function stampa() {
+            let tabella = "";
+            for (let i = 1; i < 100; i++) {
+                if (numeri[i] == 0) {
+                    tabella += "&nbsp&nbsp--&nbsp&nbsp"
+                }
+                else {
+                    tabella+="|";
+                    if (numeri[i] < 10) tabella += "0";
+                    tabella +=+numeri[i] + "|  ";
+                }
+
+                if ( i % 10 == 0) tabella += "<br>";
+            }
+            document.getElementById("tabella").innerHTML = "";
+            document.getElementById("tabella").innerHTML = tabella;
+        }
+        document.getElementById("estrai").addEventListener("click", function () {
+            estrai();
+            stampa();
+        })
+    </script>
+</body>
+
+</html>
